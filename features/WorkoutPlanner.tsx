@@ -59,7 +59,7 @@ export const WorkoutPlanner: React.FC<Props> = ({ plan, setPlan, onNext, onBack 
                         className="text-xs underline text-gray-500 hover:text-gray-800"
                         title={`Copiar a ${person === 'tomas' ? 'Agos' : 'Tomas'}`}
                      >
-                         Copiar ->
+                         Copiar &rarr;
                      </button>
                  )}
              </div>
