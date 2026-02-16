@@ -51,3 +51,4 @@ export const GlassSelect = (props: any) => (
     className={`w-full bg-white/50 border border-white/60 rounded-xl px-4 py-3 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:bg-white/80 transition-all appearance-none ${props.className || ''}`}
   />
 );
+
