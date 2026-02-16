@@ -1,21 +1,143 @@
 import { Recipe, Exercise } from './types';
 
-export const COMMON_INGREDIENTS = [
-  'Huevos', 'Pollo', 'Avena', 'Palta', 
-  'Atún', 'Arroz', 'Pan Integral', 'Lentejas', 
-  'Yogurt', 'Fruta Fresca', 'Queso', 'Espinaca',
-  'Quinoa', 'Tomate', 'Hummus', 'Nueces'
+// Structured Ingredients with Categories
+export const INGREDIENTS_LIST = [
+  // 🍖 Proteínas
+  { name: 'Huevos', category: 'protein' },
+  { name: 'Pollo', category: 'protein' },
+  { name: 'Atún', category: 'protein' },
+  { name: 'Carne Roja Magra', category: 'protein' },
+  { name: 'Jamón Cocido', category: 'protein' },
+  
+  // 🥦 Verduras
+  { name: 'Lechuga', category: 'veggie' },
+  { name: 'Tomate', category: 'veggie' },
+  { name: 'Zanahoria', category: 'veggie' },
+  { name: 'Cebolla', category: 'veggie' },
+  { name: 'Morrón', category: 'veggie' },
+  { name: 'Brócoli / Espinaca', category: 'veggie' },
+  { name: 'Acelga', category: 'veggie' },
+  { name: 'Calabaza / Zapallo', category: 'veggie' },
+  { name: 'Palta', category: 'veggie' },
+
+  // 🍞 Carbos y Despensa
+  { name: 'Arroz', category: 'carb' },
+  { name: 'Pasta Integral (Fideos)', category: 'carb' },
+  { name: 'Avena', category: 'carb' },
+  { name: 'Pan Integral', category: 'carb' },
+  { name: 'Garbanzos / Lentejas', category: 'carb' },
+  { name: 'Papa / Batata', category: 'carb' },
+  { name: 'Tapas de Tarta', category: 'carb' },
+  { name: 'Turrón / Barrita', category: 'carb' },
+  { name: 'Galletas de Arroz', category: 'carb' },
+  { name: 'Hummus', category: 'carb' },
+
+  // 🥛 Lácteos y Frutas
+  { name: 'Queso', category: 'dairy' },
+  { name: 'Yogurt', category: 'dairy' },
+  { name: 'Leche', category: 'dairy' },
+  { name: 'Fruta Fresca', category: 'dairy' },
+  { name: 'Frutos Secos', category: 'dairy' },
 ];
 
+// Helper for backward compatibility or simple lists
+export const COMMON_INGREDIENTS = INGREDIENTS_LIST.map(i => i.name);
+
 export const RECIPES: Recipe[] = [
-  // --- EXISTING BREAKFASTS ---
+  // =================================================================
+  // SNACKS (s1 - s10) - NUEVOS
+  // =================================================================
+  {
+    id: 's1',
+    name: 'Fruta Fresca (Pieza)',
+    emoji: '🍎',
+    type: 'snack',
+    owner: 'Both',
+    description: 'Manzana, Banana, Pera o Naranja.',
+    ingredients: [
+      { name: 'Fruta Fresca', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 's2',
+    name: 'Yogur con Cereales/Granola',
+    emoji: '🥣',
+    type: 'snack',
+    owner: 'Both',
+    description: 'Pote de yogur con un puñado de cereales.',
+    ingredients: [
+      { name: 'Yogurt', quantity: 1, unit: 'unidad', category: 'Lácteos' },
+      { name: 'Avena', quantity: 30, unit: 'g', category: 'Despensa' } // Proxy para granola
+    ]
+  },
+  {
+    id: 's3',
+    name: 'Turrón o Barrita de Cereal',
+    emoji: '🍫',
+    type: 'snack',
+    owner: 'Both',
+    description: 'Clásico kiosquero bajo en calorías.',
+    ingredients: [
+      { name: 'Turrón / Barrita', quantity: 1, unit: 'unidad', category: 'Despensa' }
+    ]
+  },
+  {
+    id: 's4',
+    name: 'Puñado de Frutos Secos',
+    emoji: '🥜',
+    type: 'snack',
+    owner: 'Both',
+    description: 'Nueces, almendras o mix energético.',
+    ingredients: [
+      { name: 'Frutos Secos', quantity: 30, unit: 'g', category: 'Despensa' }
+    ]
+  },
+  {
+    id: 's5',
+    name: 'Tostada con Queso y Mermelada',
+    emoji: '🍞',
+    type: 'snack',
+    owner: 'Both',
+    description: '1 Tostada de pan integral con queso untable.',
+    ingredients: [
+      { name: 'Pan Integral', quantity: 1, unit: 'rebanada', category: 'Despensa' },
+      { name: 'Queso', quantity: 30, unit: 'g', category: 'Lácteos' }
+    ]
+  },
+  {
+    id: 's6',
+    name: 'Galletas de Arroz con Queso',
+    emoji: '🍘',
+    type: 'snack',
+    owner: 'Both',
+    description: '2 Galletas de arroz con queso untable.',
+    ingredients: [
+      { name: 'Galletas de Arroz', quantity: 2, unit: 'unidades', category: 'Despensa' },
+      { name: 'Queso', quantity: 30, unit: 'g', category: 'Lácteos' }
+    ]
+  },
+  {
+    id: 's7',
+    name: 'Huevo Duro',
+    emoji: '🥚',
+    type: 'snack',
+    owner: 'Both',
+    description: 'Proteína pura y rápida.',
+    ingredients: [
+      { name: 'Huevos', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+
+  // =================================================================
+  // DESAYUNOS (b1 - b10)
+  // =================================================================
   {
     id: 'b1',
-    name: 'Huevos Revueltos con Pan',
+    name: 'Huevos Revueltos Clásicos',
     emoji: '🍳',
     type: 'breakfast',
     owner: 'Both',
-    description: '2 huevos c/u + 1 rebanada pan integral',
+    description: '2 huevos c/u + 1 tostada integral',
     ingredients: [
       { name: 'Huevos', quantity: 4, unit: 'unidades', category: 'Mercado' },
       { name: 'Pan Integral', quantity: 2, unit: 'rebanadas', category: 'Despensa' }
@@ -23,37 +145,37 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: 'b2',
-    name: 'Avena con Frutas',
+    name: 'Porridge de Avena y Fruta',
     emoji: '🥣',
     type: 'breakfast',
-    owner: 'Agos',
-    description: '40g avena + media manzana',
+    owner: 'Both',
+    description: 'Avena cocida con leche/agua y fruta fresca',
     ingredients: [
-      { name: 'Avena', quantity: 40, unit: 'g', category: 'Despensa' },
-      { name: 'Manzana', quantity: 0.5, unit: 'unidad', category: 'Mercado' }
+      { name: 'Avena', quantity: 100, unit: 'g', category: 'Despensa' },
+      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' },
+      { name: 'Frutos Secos', quantity: 20, unit: 'g', category: 'Despensa' }
     ]
   },
   {
     id: 'b3',
-    name: 'Sandwich de Jamón de Pavo',
-    emoji: '🥪',
+    name: 'Pancakes de Avena y Huevo',
+    emoji: '🥞',
     type: 'breakfast',
-    owner: 'Tomas',
-    description: '2 rebanadas pan + 100g jamón',
+    owner: 'Both',
+    description: 'Licuar avena, huevo y chorrito de leche/agua',
     ingredients: [
-      { name: 'Pan Integral', quantity: 2, unit: 'rebanadas', category: 'Despensa' },
-      { name: 'Jamón de Pavo', quantity: 100, unit: 'g', category: 'Carnicería' }
+      { name: 'Avena', quantity: 80, unit: 'g', category: 'Despensa' },
+      { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' },
+      { name: 'Fruta Fresca', quantity: 1, unit: 'unidad', category: 'Mercado' }
     ]
   },
-
-  // --- NEW BREAKFASTS (From PDF List) ---
   {
     id: 'b4',
-    name: 'Tostada Huevo y Palta',
+    name: 'Tostadón con Huevo y Palta',
     emoji: '🥑',
     type: 'breakfast',
     owner: 'Both',
-    description: '1 Tostada, 2 huevos, 1/2 palta',
+    description: 'Pan tostado, palta pisada y huevo poché o revuelto',
     ingredients: [
       { name: 'Pan Integral', quantity: 2, unit: 'rebanadas', category: 'Despensa' },
       { name: 'Huevos', quantity: 4, unit: 'unidades', category: 'Mercado' },
@@ -62,476 +184,347 @@ export const RECIPES: Recipe[] = [
   },
   {
     id: 'b5',
-    name: 'Bowl Yogurt Proteico',
-    emoji: '🥣',
+    name: 'Bowl de Yogurt y Granola',
+    emoji: '🥛',
     type: 'breakfast',
     owner: 'Both',
-    description: 'Yogurt, proteina, quinoa pop, castañas, fruta',
+    description: 'Yogurt natural con fruta y frutos secos',
     ingredients: [
-      { name: 'Yogurt Natural', quantity: 400, unit: 'g', category: 'Lácteos' },
-      { name: 'Proteína/Albúmina', quantity: 2, unit: 'scoop', category: 'Despensa' },
-      { name: 'Quinoa Pop', quantity: 40, unit: 'g', category: 'Despensa' },
-      { name: 'Castañas', quantity: 20, unit: 'g', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' }
+      { name: 'Yogurt', quantity: 400, unit: 'g', category: 'Lácteos' },
+      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' },
+      { name: 'Frutos Secos', quantity: 30, unit: 'g', category: 'Despensa' }
     ]
   },
   {
     id: 'b6',
-    name: 'Pancake Avena y Banana',
-    emoji: '🥞',
-    type: 'breakfast',
-    owner: 'Both',
-    description: 'Avena, banana, mantequilla maní',
-    ingredients: [
-      { name: 'Avena', quantity: 80, unit: 'g', category: 'Despensa' },
-      { name: 'Banana', quantity: 2, unit: 'unidad', category: 'Mercado' },
-      { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Mantequilla de Maní', quantity: 30, unit: 'g', category: 'Despensa' }
-    ]
-  },
-  {
-    id: 'b7',
-    name: 'Budín Integral y Nueces',
-    emoji: '🥮',
-    type: 'breakfast',
-    owner: 'Both',
-    description: 'Porción de budín sarraceno con nueces y fruta',
-    ingredients: [
-      { name: 'Harina Sarraceno', quantity: 100, unit: 'g', category: 'Despensa' },
-      { name: 'Nueces', quantity: 30, unit: 'g', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'b8',
-    name: 'Tostada Queso y Cherry',
-    emoji: '🧀',
-    type: 'breakfast',
-    owner: 'Both',
-    description: 'Port salut, tomates cherry, almendras',
-    ingredients: [
-      { name: 'Pan Integral', quantity: 2, unit: 'rebanadas', category: 'Despensa' },
-      { name: 'Queso Port Salut', quantity: 100, unit: 'g', category: 'Lácteos' },
-      { name: 'Tomates Cherry', quantity: 100, unit: 'g', category: 'Mercado' },
-      { name: 'Almendras', quantity: 20, unit: 'g', category: 'Despensa' }
-    ]
-  },
-  {
-    id: 'b9',
-    name: 'Barrita Proteica y Fruta',
-    emoji: '🍫',
-    type: 'snack',
-    owner: 'Both',
-    description: 'Barrita cereal proteica, fruta, nueces',
-    ingredients: [
-      { name: 'Barrita Proteica', quantity: 2, unit: 'unidades', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Nueces', quantity: 20, unit: 'g', category: 'Despensa' }
-    ]
-  },
-  {
-    id: 'b10',
-    name: 'Chia Pudding',
-    emoji: '🍮',
-    type: 'breakfast',
-    owner: 'Both',
-    description: 'Semillas chia, proteína, mantequilla maní, fruta',
-    ingredients: [
-      { name: 'Semillas de Chia', quantity: 40, unit: 'g', category: 'Despensa' },
-      { name: 'Leche/Bebida Veg', quantity: 300, unit: 'ml', category: 'Lácteos' },
-      { name: 'Proteína', quantity: 2, unit: 'scoop', category: 'Despensa' },
-      { name: 'Mantequilla de Maní', quantity: 20, unit: 'g', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'b11',
-    name: 'Porridge de Avena',
-    emoji: '🍲',
-    type: 'breakfast',
-    owner: 'Both',
-    description: 'Avena cocida, frutos secos, fruta',
-    ingredients: [
-      { name: 'Avena', quantity: 80, unit: 'g', category: 'Despensa' },
-      { name: 'Leche', quantity: 300, unit: 'ml', category: 'Lácteos' },
-      { name: 'Frutos Secos', quantity: 30, unit: 'g', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'b12',
-    name: 'Galletas Proteicas',
-    emoji: '🍪',
-    type: 'snack',
-    owner: 'Both',
-    description: 'Galletitas integrales proteicas y fruta',
-    ingredients: [
-      { name: 'Galletas Proteicas', quantity: 4, unit: 'unidades', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'b13',
-    name: 'Tostada Ricota y Miel',
-    emoji: '🍯',
-    type: 'breakfast',
-    owner: 'Both',
-    description: 'Ricota magra, miel, fruta',
-    ingredients: [
-      { name: 'Pan Integral', quantity: 2, unit: 'rebanadas', category: 'Despensa' },
-      { name: 'Ricota Magra', quantity: 100, unit: 'g', category: 'Lácteos' },
-      { name: 'Miel', quantity: 20, unit: 'g', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'b14',
-    name: 'Tostada Hummus y Palta',
-    emoji: '🥑',
-    type: 'breakfast',
-    owner: 'Both',
-    description: 'Hummus garbanzo, 1/2 palta',
-    ingredients: [
-      { name: 'Pan Integral', quantity: 2, unit: 'rebanadas', category: 'Despensa' },
-      { name: 'Hummus', quantity: 60, unit: 'g', category: 'Mercado' },
-      { name: 'Palta', quantity: 1, unit: 'unidad', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'b15',
-    name: 'Bowl Fruta y Frutos Secos',
-    emoji: '🍇',
-    type: 'snack',
-    owner: 'Both',
-    description: 'Arándanos, frutillas, mango, frutos secos',
-    ingredients: [
-      { name: 'Mix Frutos Rojos/Mango', quantity: 300, unit: 'g', category: 'Mercado' },
-      { name: 'Mix Frutos Secos', quantity: 50, unit: 'g', category: 'Despensa' }
-    ]
-  },
-  {
-    id: 'b16',
-    name: 'Tostada Francesa',
+    name: 'Tostadas con Queso y Mermelada Light',
     emoji: '🍞',
     type: 'breakfast',
     owner: 'Both',
-    description: 'Huevo, pan integral, miel, fruta',
+    description: 'Clásico rápido y liviano',
     ingredients: [
-      { name: 'Pan Integral', quantity: 2, unit: 'rebanadas', category: 'Despensa' },
-      { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Miel', quantity: 20, unit: 'g', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'b17',
-    name: 'Brownie Saludable',
-    emoji: '🍫',
-    type: 'snack',
-    owner: 'Both',
-    description: 'Brownie fit con nueces y fruta',
-    ingredients: [
-      { name: 'Cacao en Polvo', quantity: 20, unit: 'g', category: 'Despensa' },
-      { name: 'Nueces', quantity: 20, unit: 'g', category: 'Despensa' },
-      { name: 'Fruta Fresca', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Harina de Avena', quantity: 50, unit: 'g', category: 'Despensa' }
+      { name: 'Pan Integral', quantity: 4, unit: 'rebanadas', category: 'Despensa' },
+      { name: 'Queso', quantity: 100, unit: 'g', category: 'Lácteos' },
+      { name: 'Fruta Fresca', quantity: 1, unit: 'unidad', category: 'Mercado' }
     ]
   },
 
-  // --- EXISTING LUNCH/DINNER ---
+  // =================================================================
+  // ALMUERZOS Y CENAS - BASICOS Y RAPIDOS (l1 - l15)
+  // =================================================================
   {
     id: 'l1',
-    name: 'Pechuga a la Plancha y Vegetales',
-    emoji: '🍗',
+    name: 'Pollo Grillé con Ensalada Mixta',
+    emoji: '🥗',
     type: 'lunch',
     owner: 'Both',
-    description: 'Tomas 180g, Agos 150g. Vegetales al gusto.',
+    description: 'Pechuga a la plancha con lechuga, tomate y zanahoria',
     ingredients: [
-      { name: 'Pechuga de Pollo', quantity: 330, unit: 'g', category: 'Carnicería' },
-      { name: 'Mix Vegetales', quantity: 300, unit: 'g', category: 'Mercado' },
-      { name: 'Aceite de Oliva', quantity: 10, unit: 'ml', category: 'Despensa' }
+      { name: 'Pollo', quantity: 350, unit: 'g', category: 'Carnicería' },
+      { name: 'Lechuga', quantity: 1, unit: 'planta', category: 'Mercado' },
+      { name: 'Tomate', quantity: 2, unit: 'unidades', category: 'Mercado' },
+      { name: 'Zanahoria', quantity: 2, unit: 'unidades', category: 'Mercado' }
     ]
   },
   {
     id: 'l2',
-    name: 'Carne Molida con Arroz',
+    name: 'Pollo a la Plancha con Arroz',
     emoji: '🍚',
     type: 'lunch',
     owner: 'Both',
-    description: 'Tomas 200g carne/100g arroz. Agos 150g carne/80g arroz.',
+    description: 'Básico infalible de pre-entreno',
     ingredients: [
-      { name: 'Carne Molida', quantity: 350, unit: 'g', category: 'Carnicería' },
-      { name: 'Arroz', quantity: 180, unit: 'g', category: 'Despensa' }
+      { name: 'Pollo', quantity: 350, unit: 'g', category: 'Carnicería' },
+      { name: 'Arroz', quantity: 150, unit: 'g', category: 'Despensa' }
     ]
   },
   {
     id: 'l3',
-    name: 'Ensalada César con Pollo',
-    emoji: '🥗',
-    type: 'lunch',
-    owner: 'Agos',
-    description: '150g pollo + lechuga + aderezo light',
-    ingredients: [
-      { name: 'Pechuga de Pollo', quantity: 150, unit: 'g', category: 'Carnicería' },
-      { name: 'Lechuga', quantity: 1, unit: 'unidad', category: 'Mercado' },
-      { name: 'Aderezo Light', quantity: 30, unit: 'ml', category: 'Despensa' }
-    ]
-  },
-
-  // --- NEW LUNCH/DINNER (From PDF List) ---
-  {
-    id: 'l4',
-    name: 'Ensalada Quinoa y Pollo',
-    emoji: '🥗',
+    name: 'Arroz con Atún (La Vieja Confiable)',
+    emoji: '🐟',
     type: 'lunch',
     owner: 'Both',
-    description: 'Pollo, quinoa/arroz, tomates secos, rúcula, nueces',
+    description: 'Arroz blanco mezclado con atún al natural',
     ingredients: [
-      { name: 'Pechuga de Pollo', quantity: 300, unit: 'g', category: 'Carnicería' },
-      { name: 'Quinoa', quantity: 150, unit: 'g', category: 'Despensa' },
-      { name: 'Tomates Desecados', quantity: 50, unit: 'g', category: 'Mercado' },
-      { name: 'Rúcula', quantity: 1, unit: 'paquete', category: 'Mercado' },
-      { name: 'Nueces', quantity: 30, unit: 'g', category: 'Despensa' }
+      { name: 'Arroz', quantity: 150, unit: 'g', category: 'Despensa' },
+      { name: 'Atún', quantity: 2, unit: 'latas', category: 'Despensa' }
+    ]
+  },
+  {
+    id: 'l4',
+    name: 'Wraps de Pollo y Vegetales',
+    emoji: '🌯',
+    type: 'lunch',
+    owner: 'Both',
+    description: 'Tortillas de trigo rellenas de pollo salteado y verduras',
+    ingredients: [
+      { name: 'Pollo', quantity: 300, unit: 'g', category: 'Carnicería' },
+      { name: 'Pan Integral', quantity: 4, unit: 'tortillas', category: 'Despensa' },
+      { name: 'Lechuga', quantity: 1, unit: 'planta', category: 'Mercado' },
+      { name: 'Tomate', quantity: 2, unit: 'unidades', category: 'Mercado' }
     ]
   },
   {
     id: 'l5',
-    name: 'Sándwich Integral Completo',
-    emoji: '🥪',
-    type: 'lunch',
+    name: 'Omelette de Jamón y Queso',
+    emoji: '🍳',
+    type: 'dinner',
     owner: 'Both',
-    description: 'Huevo, queso, hummus, champiñones, espinaca',
+    description: 'Cena rápida alta en proteína',
     ingredients: [
-      { name: 'Pan Integral', quantity: 4, unit: 'rebanadas', category: 'Despensa' },
-      { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Queso en Fetas', quantity: 100, unit: 'g', category: 'Lácteos' },
-      { name: 'Hummus', quantity: 50, unit: 'g', category: 'Mercado' },
-      { name: 'Champiñones', quantity: 100, unit: 'g', category: 'Mercado' },
-      { name: 'Espinaca', quantity: 100, unit: 'g', category: 'Mercado' }
+      { name: 'Huevos', quantity: 5, unit: 'unidades', category: 'Mercado' },
+      { name: 'Jamón Cocido', quantity: 100, unit: 'g', category: 'Carnicería' },
+      { name: 'Queso', quantity: 80, unit: 'g', category: 'Lácteos' }
     ]
   },
   {
     id: 'l6',
-    name: 'Ensalada Trigo Burgol y Atún',
-    emoji: '🐟',
-    type: 'lunch',
+    name: 'Ensalada Completa de Atún',
+    emoji: '🥗',
+    type: 'dinner',
     owner: 'Both',
-    description: 'Atún, trigo burgol, palta, mango, cherrys, almendras',
+    description: 'Atún, huevo duro, choclo, tomate y lechuga',
     ingredients: [
-      { name: 'Atún al natural', quantity: 2, unit: 'latas', category: 'Despensa' },
-      { name: 'Trigo Burgol', quantity: 150, unit: 'g', category: 'Despensa' },
-      { name: 'Palta', quantity: 1, unit: 'unidad', category: 'Mercado' },
-      { name: 'Mango', quantity: 1, unit: 'unidad', category: 'Mercado' },
-      { name: 'Tomates Cherry', quantity: 150, unit: 'g', category: 'Mercado' },
-      { name: 'Almendras', quantity: 30, unit: 'g', category: 'Despensa' }
+      { name: 'Atún', quantity: 2, unit: 'latas', category: 'Despensa' },
+      { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' },
+      { name: 'Lechuga', quantity: 1, unit: 'planta', category: 'Mercado' },
+      { name: 'Tomate', quantity: 2, unit: 'unidades', category: 'Mercado' }
     ]
   },
   {
     id: 'l7',
-    name: 'Wok Arroz Yamaní y Pollo',
-    emoji: '🍛',
+    name: 'Bife Magro con Puré de Calabaza',
+    emoji: '🥩',
+    type: 'dinner',
+    owner: 'Both',
+    description: 'Carne roja magra con puré dulce',
+    ingredients: [
+      { name: 'Carne Roja Magra', quantity: 350, unit: 'g', category: 'Carnicería' },
+      { name: 'Calabaza / Zapallo', quantity: 400, unit: 'g', category: 'Mercado' }
+    ]
+  },
+
+  // =================================================================
+  // ALMUERZOS Y CENAS - ARGENTINOS ELABORADOS (l18 - l40)
+  // =================================================================
+  {
+    id: 'l18',
+    name: 'Pastel de Papa Saludable',
+    emoji: '🥧',
     type: 'lunch',
     owner: 'Both',
-    description: 'Pollo, arroz yamaní, verduras wok, semillas zapallo',
+    description: 'Base de carne magra, puré de calabaza y papa gratinado.',
     ingredients: [
-      { name: 'Pechuga de Pollo', quantity: 300, unit: 'g', category: 'Carnicería' },
-      { name: 'Arroz Yamaní', quantity: 150, unit: 'g', category: 'Despensa' },
-      { name: 'Mix Vegetales Wok', quantity: 400, unit: 'g', category: 'Mercado' },
-      { name: 'Semillas de Zapallo', quantity: 30, unit: 'g', category: 'Despensa' }
+      { name: 'Carne Roja Magra', quantity: 400, unit: 'g', category: 'Carnicería' },
+      { name: 'Papa / Batata', quantity: 300, unit: 'g', category: 'Mercado' },
+      { name: 'Calabaza / Zapallo', quantity: 300, unit: 'g', category: 'Mercado' },
+      { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' },
+      { name: 'Cebolla', quantity: 1, unit: 'unidad', category: 'Mercado' }
     ]
   },
   {
-    id: 'l8',
-    name: 'Milanesa Pollo y Repollo',
+    id: 'l19',
+    name: 'Bife con Ensalada Rusa Fit',
+    emoji: '🥩',
+    type: 'lunch',
+    owner: 'Both',
+    description: 'Bife a la plancha con papa, zanahoria y arvejas (mayo light).',
+    ingredients: [
+      { name: 'Carne Roja Magra', quantity: 350, unit: 'g', category: 'Carnicería' },
+      { name: 'Papa / Batata', quantity: 200, unit: 'g', category: 'Mercado' },
+      { name: 'Zanahoria', quantity: 2, unit: 'unidades', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l20',
+    name: 'Calabaza Rellena con Carne',
+    emoji: '🎃',
+    type: 'dinner',
+    owner: 'Both',
+    description: 'Media calabaza rellena de carne picada y queso.',
+    ingredients: [
+      { name: 'Calabaza / Zapallo', quantity: 1, unit: 'unidad', category: 'Mercado' },
+      { name: 'Carne Roja Magra', quantity: 300, unit: 'g', category: 'Carnicería' },
+      { name: 'Queso', quantity: 80, unit: 'g', category: 'Lácteos' },
+      { name: 'Cebolla', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l21',
+    name: 'Milanesa de Pollo con Puré Mixto',
     emoji: '🍗',
     type: 'lunch',
     owner: 'Both',
-    description: 'Milanesa al horno, repollo, berenjena',
+    description: 'Milanesa al horno con puré de papa y calabaza.',
     ingredients: [
-      { name: 'Milanesa de Pollo', quantity: 4, unit: 'unidades', category: 'Carnicería' },
-      { name: 'Repollo', quantity: 0.5, unit: 'unidad', category: 'Mercado' },
-      { name: 'Berenjena', quantity: 1, unit: 'unidad', category: 'Mercado' }
+      { name: 'Pollo', quantity: 350, unit: 'g', category: 'Carnicería' }, // Milanesas
+      { name: 'Papa / Batata', quantity: 200, unit: 'g', category: 'Mercado' },
+      { name: 'Calabaza / Zapallo', quantity: 200, unit: 'g', category: 'Mercado' },
+      { name: 'Huevos', quantity: 1, unit: 'unidad', category: 'Mercado' }
     ]
   },
   {
-    id: 'l9',
-    name: 'Ensalada Lentejas y Arroz',
-    emoji: '🥗',
+    id: 'l22',
+    name: 'Wok de Pollo, Arroz y Vegetales',
+    emoji: '🥢',
     type: 'lunch',
     owner: 'Both',
-    description: 'Lentejas, arroz integral, rúcula, tomate, zucchini',
+    description: 'Salteado estilo oriental con salsa de soja.',
     ingredients: [
-      { name: 'Lentejas', quantity: 200, unit: 'g', category: 'Despensa' },
-      { name: 'Arroz Integral', quantity: 150, unit: 'g', category: 'Despensa' },
-      { name: 'Rúcula', quantity: 1, unit: 'paquete', category: 'Mercado' },
-      { name: 'Tomate', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Zucchini', quantity: 1, unit: 'unidad', category: 'Mercado' }
+      { name: 'Pollo', quantity: 300, unit: 'g', category: 'Carnicería' },
+      { name: 'Brócoli / Espinaca', quantity: 200, unit: 'g', category: 'Mercado' },
+      { name: 'Zanahoria', quantity: 2, unit: 'unidades', category: 'Mercado' },
+      { name: 'Arroz', quantity: 150, unit: 'g', category: 'Despensa' }
     ]
   },
   {
-    id: 'l10',
-    name: 'Hamburguesa Quinoa',
+    id: 'l23',
+    name: 'Pechuga con Batatas al Horno',
+    emoji: '🍠',
+    type: 'dinner',
+    owner: 'Both',
+    description: 'Pechuga grillada con bastones de batata crocantes.',
+    ingredients: [
+      { name: 'Pollo', quantity: 350, unit: 'g', category: 'Carnicería' },
+      { name: 'Papa / Batata', quantity: 300, unit: 'g', category: 'Mercado' } // Batata
+    ]
+  },
+  {
+    id: 'l24',
+    name: 'Fideos Integrales a la Boloñesa',
+    emoji: '🍝',
+    type: 'lunch',
+    owner: 'Both',
+    description: 'Con carne picada magra y salsa de tomate casera.',
+    ingredients: [
+      { name: 'Pasta Integral (Fideos)', quantity: 200, unit: 'g', category: 'Despensa' },
+      { name: 'Carne Roja Magra', quantity: 250, unit: 'g', category: 'Carnicería' },
+      { name: 'Tomate', quantity: 3, unit: 'unidades', category: 'Mercado' },
+      { name: 'Cebolla', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l25',
+    name: 'Pasta con Brócoli, Ajo y Pollo',
+    emoji: '🥦',
+    type: 'lunch',
+    owner: 'Both',
+    description: 'Salteado liviano sin crema.',
+    ingredients: [
+      { name: 'Pasta Integral (Fideos)', quantity: 200, unit: 'g', category: 'Despensa' },
+      { name: 'Brócoli / Espinaca', quantity: 250, unit: 'g', category: 'Mercado' },
+      { name: 'Pollo', quantity: 200, unit: 'g', category: 'Carnicería' }
+    ]
+  },
+  {
+    id: 'l26',
+    name: 'Fideos con Atún y Tomate',
+    emoji: '🐟',
+    type: 'dinner',
+    owner: 'Both',
+    description: 'Salsa rápida de tomate natural y atún.',
+    ingredients: [
+      { name: 'Pasta Integral (Fideos)', quantity: 200, unit: 'g', category: 'Despensa' },
+      { name: 'Atún', quantity: 170, unit: 'g', category: 'Despensa' },
+      { name: 'Tomate', quantity: 2, unit: 'unidades', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l27',
+    name: 'Guiso de Lentejas Argentino',
+    emoji: '🍲',
+    type: 'lunch',
+    owner: 'Both',
+    description: 'Con trocitos de carne magra, papa y calabaza.',
+    ingredients: [
+      { name: 'Garbanzos / Lentejas', quantity: 250, unit: 'g', category: 'Despensa' },
+      { name: 'Carne Roja Magra', quantity: 200, unit: 'g', category: 'Carnicería' },
+      { name: 'Papa / Batata', quantity: 150, unit: 'g', category: 'Mercado' },
+      { name: 'Cebolla', quantity: 1, unit: 'unidad', category: 'Mercado' },
+      { name: 'Tomate', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l28',
+    name: 'Tortilla de Papa y Espinaca',
+    emoji: '🍳',
+    type: 'dinner',
+    owner: 'Both',
+    description: 'Hecha al horno para reducir aceite, alta y esponjosa.',
+    ingredients: [
+      { name: 'Papa / Batata', quantity: 300, unit: 'g', category: 'Mercado' },
+      { name: 'Brócoli / Espinaca', quantity: 200, unit: 'g', category: 'Mercado' },
+      { name: 'Huevos', quantity: 5, unit: 'unidades', category: 'Mercado' },
+      { name: 'Cebolla', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l29',
+    name: 'Hamburguesas Caseras de Garbanzo',
     emoji: '🍔',
+    type: 'dinner',
+    owner: 'Both',
+    description: 'Procesar garbanzos con condimentos y arroz.',
+    ingredients: [
+      { name: 'Garbanzos / Lentejas', quantity: 300, unit: 'g', category: 'Despensa' },
+      { name: 'Arroz', quantity: 50, unit: 'g', category: 'Despensa' },
+      { name: 'Lechuga', quantity: 1, unit: 'planta', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l30',
+    name: 'Revuelto Gramajo Fit',
+    emoji: '🍟',
+    type: 'dinner',
+    owner: 'Both',
+    description: 'Huevo revuelto, jamón, arvejas y papas al horno (no fritas).',
+    ingredients: [
+      { name: 'Huevos', quantity: 4, unit: 'unidades', category: 'Mercado' },
+      { name: 'Papa / Batata', quantity: 200, unit: 'g', category: 'Mercado' },
+      { name: 'Jamón Cocido', quantity: 100, unit: 'g', category: 'Carnicería' },
+      { name: 'Zanahoria', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l31',
+    name: 'Tarta de Acelga y Huevo',
+    emoji: '🥬',
     type: 'lunch',
     owner: 'Both',
-    description: 'Hamburguesas quinoa, vegetales grillados, huevo duro',
+    description: 'Tarta pascualina con masa integral si es posible.',
     ingredients: [
-      { name: 'Hamburguesa Quinoa', quantity: 4, unit: 'unidades', category: 'Despensa' },
-      { name: 'Vegetales Grillados', quantity: 300, unit: 'g', category: 'Mercado' },
+      { name: 'Tapas de Tarta', quantity: 1, unit: 'unidad', category: 'Despensa' },
+      { name: 'Acelga', quantity: 1, unit: 'atado', category: 'Mercado' },
+      { name: 'Huevos', quantity: 3, unit: 'unidades', category: 'Mercado' },
+      { name: 'Cebolla', quantity: 1, unit: 'unidad', category: 'Mercado' }
+    ]
+  },
+  {
+    id: 'l32',
+    name: 'Tarta de Jamón y Queso',
+    emoji: '🧀',
+    type: 'lunch',
+    owner: 'Both',
+    description: 'Clásica tarta de J&Q con huevo batido.',
+    ingredients: [
+      { name: 'Tapas de Tarta', quantity: 1, unit: 'unidad', category: 'Despensa' },
+      { name: 'Jamón Cocido', quantity: 150, unit: 'g', category: 'Carnicería' },
+      { name: 'Queso', quantity: 150, unit: 'g', category: 'Lácteos' },
       { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' }
     ]
   },
   {
-    id: 'l11',
-    name: 'Ensalada Garbanzos Crocantes',
-    emoji: '🥙',
+    id: 'l33',
+    name: 'Tarta de Calabaza y Choclo',
+    emoji: '🌽',
     type: 'lunch',
     owner: 'Both',
-    description: 'Garbanzos, arroz, tomate, lechuga, chía',
+    description: 'Relleno suave de calabaza pisada y granos de choclo.',
     ingredients: [
-      { name: 'Garbanzos', quantity: 250, unit: 'g', category: 'Despensa' },
-      { name: 'Arroz', quantity: 150, unit: 'g', category: 'Despensa' },
-      { name: 'Tomate', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Lechuga', quantity: 1, unit: 'planta', category: 'Mercado' },
-      { name: 'Semillas de Chia', quantity: 20, unit: 'g', category: 'Despensa' }
-    ]
-  },
-  {
-    id: 'l12',
-    name: 'Omelette Port Salut',
-    emoji: '🍳',
-    type: 'dinner',
-    owner: 'Both',
-    description: 'Huevos, queso, espinaca, cherry, girasol',
-    ingredients: [
-      { name: 'Huevos', quantity: 6, unit: 'unidades', category: 'Mercado' },
-      { name: 'Queso Port Salut', quantity: 100, unit: 'g', category: 'Lácteos' },
-      { name: 'Espinaca', quantity: 100, unit: 'g', category: 'Mercado' },
-      { name: 'Tomates Cherry', quantity: 100, unit: 'g', category: 'Mercado' },
-      { name: 'Semillas Girasol', quantity: 20, unit: 'g', category: 'Despensa' }
-    ]
-  },
-  {
-    id: 'l13',
-    name: 'Tarta Queso y Ricota',
-    emoji: '🥧',
-    type: 'dinner',
-    owner: 'Both',
-    description: 'Masa, cebolla, ricota, tomate, apio',
-    ingredients: [
-      { name: 'Tapa de Tarta', quantity: 1, unit: 'unidad', category: 'Mercado' },
-      { name: 'Cebolla', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Ricota', quantity: 300, unit: 'g', category: 'Lácteos' },
-      { name: 'Tomate', quantity: 2, unit: 'unidades', category: 'Mercado' },
-      { name: 'Queso', quantity: 100, unit: 'g', category: 'Lácteos' }
-    ]
-  },
-  {
-    id: 'l14',
-    name: 'Tarta Calabaza y Roquefort',
-    emoji: '🥧',
-    type: 'dinner',
-    owner: 'Both',
-    description: 'Calabaza, morrones, queso roquefort',
-    ingredients: [
-      { name: 'Tapa de Tarta', quantity: 1, unit: 'unidad', category: 'Mercado' },
-      { name: 'Calabaza', quantity: 1, unit: 'unidad', category: 'Mercado' },
-      { name: 'Morrón Rojo', quantity: 1, unit: 'unidad', category: 'Mercado' },
-      { name: 'Queso Roquefort', quantity: 100, unit: 'g', category: 'Lácteos' },
-      { name: 'Huevos', quantity: 3, unit: 'unidades', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'l15',
-    name: 'Tacos Integrales Pollo',
-    emoji: '🌮',
-    type: 'dinner',
-    owner: 'Both',
-    description: 'Tortillas integrales, hummus, pollo, verduras',
-    ingredients: [
-      { name: 'Rapiditas Integrales', quantity: 6, unit: 'unidades', category: 'Despensa' },
-      { name: 'Pechuga de Pollo', quantity: 300, unit: 'g', category: 'Carnicería' },
-      { name: 'Hummus', quantity: 100, unit: 'g', category: 'Mercado' },
-      { name: 'Mix Vegetales', quantity: 300, unit: 'g', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'l16',
-    name: 'Fideos con Lentejas',
-    emoji: '🍝',
-    type: 'dinner',
-    owner: 'Both',
-    description: 'Fideos integrales, lentejas, vegetales',
-    ingredients: [
-      { name: 'Fideos Integrales', quantity: 200, unit: 'g', category: 'Despensa' },
-      { name: 'Lentejas', quantity: 200, unit: 'g', category: 'Despensa' },
-      { name: 'Salsa de Tomate', quantity: 200, unit: 'ml', category: 'Despensa' },
-      { name: 'Vegetales Picados', quantity: 200, unit: 'g', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'l17',
-    name: 'Ensalada Caprese con Fideos',
-    emoji: '🍜',
-    type: 'dinner',
-    owner: 'Both',
-    description: 'Fideos integrales, cherrys, albahaca, bocconcinos',
-    ingredients: [
-      { name: 'Fideos Integrales', quantity: 200, unit: 'g', category: 'Despensa' },
-      { name: 'Tomates Cherry', quantity: 200, unit: 'g', category: 'Mercado' },
-      { name: 'Albahaca', quantity: 1, unit: 'atado', category: 'Mercado' },
-      { name: 'Bocconcinos/Muzzarella', quantity: 150, unit: 'g', category: 'Lácteos' }
-    ]
-  },
-
-  // --- EXISTING SNACKS (Re-added for context) ---
-  {
-    id: 's1',
-    name: 'Yogurt Griego y Nueces',
-    emoji: '🥛',
-    type: 'snack',
-    owner: 'Both',
-    description: '1 taza yogurt + 15g nueces',
-    ingredients: [
-      { name: 'Yogurt Griego', quantity: 2, unit: 'taza', category: 'Lácteos' },
-      { name: 'Nueces', quantity: 30, unit: 'g', category: 'Despensa' }
-    ]
-  },
-  {
-    id: 's2',
-    name: 'Batido de Proteína',
-    emoji: '🥤',
-    type: 'snack',
-    owner: 'Tomas',
-    description: '1 scoop whey protein',
-    ingredients: [
-      { name: 'Whey Protein', quantity: 1, unit: 'scoop', category: 'Despensa' }
-    ]
-  },
-
-  // --- EXISTING DINNER ---
-  {
-    id: 'd1',
-    name: 'Pescado al Horno',
-    emoji: '🐟',
-    type: 'dinner',
-    owner: 'Both',
-    description: 'Tomas 200g, Agos 150g',
-    ingredients: [
-      { name: 'Filete de Tilapia', quantity: 350, unit: 'g', category: 'Carnicería' },
-      { name: 'Espárragos', quantity: 200, unit: 'g', category: 'Mercado' }
-    ]
-  },
-  {
-    id: 'd2',
-    name: 'Omelette de Claras',
-    emoji: '🥚',
-    type: 'dinner',
-    owner: 'Both',
-    description: '4 claras c/u + espinaca',
-    ingredients: [
-      { name: 'Huevos', quantity: 8, unit: 'unidades', category: 'Mercado' },
-      { name: 'Espinaca', quantity: 100, unit: 'g', category: 'Mercado' }
+      { name: 'Tapas de Tarta', quantity: 1, unit: 'unidad', category: 'Despensa' },
+      { name: 'Calabaza / Zapallo', quantity: 400, unit: 'g', category: 'Mercado' },
+      { name: 'Queso', quantity: 50, unit: 'g', category: 'Lácteos' },
+      { name: 'Huevos', quantity: 2, unit: 'unidades', category: 'Mercado' }
     ]
   }
 ];

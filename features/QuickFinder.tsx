@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { RECIPES, COMMON_INGREDIENTS } from '../constants';
-import { ArrowLeft, ChefHat, Filter } from 'lucide-react';
-import { GlassCard, GlassButton } from '../components/UI';
+import { RECIPES, INGREDIENTS_LIST } from '../constants';
+import { ArrowLeft, ChefHat } from 'lucide-react';
+import { GlassCard } from '../components/UI';
 
 interface Props {
   onExit: () => void;
@@ -46,6 +46,16 @@ export const QuickFinder: React.FC<Props> = ({ onExit }) => {
 
   }, [selectedGroup, selectedIngredients]);
 
+  // Group ingredients for display
+  const ingredientGroups = useMemo(() => {
+      return {
+          protein: { title: 'Proteínas', items: INGREDIENTS_LIST.filter(i => i.category === 'protein') },
+          veggie: { title: 'Verduras', items: INGREDIENTS_LIST.filter(i => i.category === 'veggie') },
+          carb: { title: 'Carbos/Despensa', items: INGREDIENTS_LIST.filter(i => i.category === 'carb') },
+          dairy: { title: 'Lácteos/Frutas', items: INGREDIENTS_LIST.filter(i => i.category === 'dairy') },
+      };
+  }, []);
+
   return (
     <div className="max-w-3xl mx-auto p-4 min-h-screen pb-20">
       <div className="flex items-center gap-4 mb-8 pt-4">
@@ -69,35 +79,51 @@ export const QuickFinder: React.FC<Props> = ({ onExit }) => {
                 className={`p-6 text-center border-2 ${selectedGroup === 'breakfast' ? 'border-orange-400 bg-orange-50/50' : 'border-transparent hover:bg-white/80'}`}
             >
                 <span className="text-4xl block mb-2 filter drop-shadow-sm">🍳</span>
-                <span className="font-bold text-slate-700">Desayuno</span>
+                <span className="font-bold text-slate-700">Desayuno / Snack</span>
             </GlassCard>
             <GlassCard 
                 onClick={() => setSelectedGroup('lunch')}
                 className={`p-6 text-center border-2 ${selectedGroup === 'lunch' ? 'border-green-400 bg-green-50/50' : 'border-transparent hover:bg-white/80'}`}
             >
                 <span className="text-4xl block mb-2 filter drop-shadow-sm">🥗</span>
-                <span className="font-bold text-slate-700">Comida</span>
+                <span className="font-bold text-slate-700">Comida / Cena</span>
             </GlassCard>
             </div>
         </section>
 
         {/* Step 2 */}
         <section>
-            <h3 className="font-bold text-slate-500 uppercase text-xs tracking-wider mb-3 ml-1">2. ¿Qué tienes?</h3>
-            <GlassCard className="p-5 flex flex-wrap gap-2">
-            {COMMON_INGREDIENTS.map(ing => (
-                <button
-                key={ing}
-                onClick={() => toggleIngredient(ing)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                    selectedIngredients.includes(ing)
-                    ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/30 scale-105'
-                    : 'bg-white/50 text-slate-600 hover:bg-white/80'
-                }`}
+            <div className="flex justify-between items-center mb-3 ml-1">
+                <h3 className="font-bold text-slate-500 uppercase text-xs tracking-wider">2. ¿Qué tienes?</h3>
+                <button 
+                    onClick={() => setSelectedIngredients(INGREDIENTS_LIST.map(i => i.name))}
+                    className="text-xs text-blue-600 font-bold hover:underline"
                 >
-                {ing}
+                    Tengo todo
                 </button>
-            ))}
+            </div>
+            
+            <GlassCard className="p-5 space-y-5">
+                {Object.values(ingredientGroups).map(group => (
+                    <div key={group.title}>
+                        <h4 className="text-xs font-bold text-slate-400 mb-2 uppercase">{group.title}</h4>
+                        <div className="flex flex-wrap gap-2">
+                            {group.items.map(ing => (
+                                <button
+                                key={ing.name}
+                                onClick={() => toggleIngredient(ing.name)}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 border ${
+                                    selectedIngredients.includes(ing.name)
+                                    ? 'bg-blue-500 text-white border-blue-500 shadow-md scale-105'
+                                    : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'
+                                }`}
+                                >
+                                {ing.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                ))}
             </GlassCard>
         </section>
 

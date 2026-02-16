@@ -12,11 +12,24 @@ import { PageBackground, GlassCard, GlassButton, GlassInput, GlassSelect } from 
 
 const STORAGE_KEY = 'tomas_agos_plans_v1';
 
+// Move ContentWrapper outside to prevent re-mounting on every render
+const ContentWrapper = ({ children }: { children: React.ReactNode }) => (
+    <>
+      <PageBackground />
+      <div className="relative z-10 font-sans text-slate-800">
+          {children}
+      </div>
+    </>
+);
+
 const App: React.FC = () => {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [view, setView] = useState<ViewState>('LIST');
   const [activePlan, setActivePlan] = useState<Plan | null>(null);
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  
+  // LIFTED STATE: Control wizard step here to persist across data updates
+  const [mealWizardStep, setMealWizardStep] = useState(0);
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -43,6 +56,7 @@ const App: React.FC = () => {
     };
     setActivePlan(newPlan);
     setSelectedIngredients([]);
+    setMealWizardStep(0); // Reset wizard step for new plan
     setView('CREATE_SETUP');
   };
 
@@ -76,16 +90,6 @@ const App: React.FC = () => {
           setPlans(plans.filter(p => p.id !== id));
       }
   };
-
-  // --- Wrapper to inject background ---
-  const ContentWrapper = ({ children }: { children: React.ReactNode }) => (
-      <>
-        <PageBackground />
-        <div className="relative z-10 font-sans text-slate-800">
-            {children}
-        </div>
-      </>
-  );
 
   // --- Render Views ---
 
@@ -186,7 +190,11 @@ const App: React.FC = () => {
                 <IngredientFilter 
                     selectedIngredients={selectedIngredients}
                     onToggleIngredient={toggleIngredient}
-                    onNext={() => setView('CREATE_MEALS')}
+                    setSelectedIngredients={setSelectedIngredients} // Pass the setter for 'Select All'
+                    onNext={() => {
+                        setMealWizardStep(0); // Ensure we start at step 0
+                        setView('CREATE_MEALS');
+                    }}
                     onBack={() => setView('CREATE_SETUP')}
                 />
             </div>
@@ -202,6 +210,8 @@ const App: React.FC = () => {
                     plan={activePlan} 
                     setPlan={handlePlanUpdate} 
                     selectedIngredients={selectedIngredients}
+                    currentStep={mealWizardStep}       // Pass state from parent
+                    setCurrentStep={setMealWizardStep} // Pass setter from parent
                     onNext={() => setView('CREATE_SCHEDULE')}
                     onBack={() => setView('FILTER_INGREDIENTS')}
                 />
